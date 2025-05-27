@@ -10,7 +10,7 @@ app.get("/", (req: Request, res: Response) => {
   res.send({ message: "assignment-09 start!" });
 });
 
-// app.use("/api/v1", router);
+app.use("/api/v1", router);
 
 // ✅ Error handler
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {

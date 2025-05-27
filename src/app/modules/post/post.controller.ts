@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { JwtPayload } from "jsonwebtoken";
 import { catchAsync } from "../../share/catchAsync";
-import { sendResponse } from "../../share/sendResponse";
 import { postService } from "./post.service";
+import { sendResponse } from "../../share/sendResponse";
 
 const postCreateData = catchAsync(async (req: Request, res: Response) => {
   const userId = req.user as JwtPayload;

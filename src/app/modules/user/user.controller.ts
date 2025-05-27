@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { JwtPayload } from "jsonwebtoken";
-import { catchAsync } from "../../share/catchAsync";
 import { sendResponse } from "../../share/sendResponse";
+import { catchAsync } from "../../share/catchAsync";
 import { userService } from "./user.service";
 
 const getAllUser = catchAsync(async (req: Request, res: Response) => {

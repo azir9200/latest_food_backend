@@ -1,12 +1,12 @@
 import { PrismaClient, User } from "@prisma/client";
 import { endOfMonth, format, startOfMonth, subMonths } from "date-fns";
-
 import bcrypt from "bcrypt";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { userInfo } from "../../interface/ts/userInfo";
 import { makePaymentAsync, verifyPaymentAsync } from "./premiumUser";
+
 const prisma = new PrismaClient();
 const RegisterUser = async (payload: User) => {
+  console.log("user service", payload);
   const passwordHash = await bcrypt.hash(payload.password, 10);
   const result = await prisma.user.create({
     data: {
@@ -20,6 +20,7 @@ const RegisterUser = async (payload: User) => {
   const { password, ...userWithoutPassword } = result;
   return userWithoutPassword;
 };
+
 const loginUser = async (payload: Partial<User>) => {
   const { email, password } = payload;
 
