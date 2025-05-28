@@ -41,12 +41,12 @@ model subscription {
   paymentMethod String
   price Int @default(1000)
   subscriptedAt DateTime @default(now())
-  transaction Transaction? @relation()
+  transaction Trnasaction? @relation()
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Transaction {
+model Trnasaction {
   id String @id @default(uuid())
   subscription subscription @relation(fields: [subscriptionId], references: [id])
   subscriptionId String @unique
@@ -85,8 +85,8 @@ model Post {
   ratings Ratings[]
  comments Comments[]
   @@map("post")
-}
 
+}
 model Coupon {
   id                 String   @id @default(ulid())
   code               String   @unique
