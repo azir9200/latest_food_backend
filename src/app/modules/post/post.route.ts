@@ -5,7 +5,7 @@ import { authorizeRole } from "../../middleware/authorizeRole";
 const router = Router();
 router.post(
   "/create",
-  authorizeRole(["ADMIN", "USER"]),
+  // authorizeRole(["ADMIN", "USER"]),
   postController.postCreateData
 );
 router.get(

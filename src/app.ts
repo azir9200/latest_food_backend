@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req: Request, res: Response) => {
-  res.send({ message: "assignment-09 start!" });
+  res.send({ message: "Hey developer, Your code is running well!" });
 });
 
 app.use("/api/v1", router);

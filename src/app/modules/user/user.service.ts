@@ -23,6 +23,7 @@ const RegisterUser = async (payload: User) => {
 
 const loginUser = async (payload: Partial<User>) => {
   const { email, password } = payload;
+  // console.log("service login", payload);
 
   const existingUser = await prisma.user.findUnique({
     where: { email },

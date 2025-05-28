@@ -1,7 +1,6 @@
 import { Post } from "@prisma/client";
 import { endOfMonth, format, startOfMonth, subMonths } from "date-fns";
-import { prisma } from "../../share/prismaClient";
-// import { prisma } from "../../share/prismaClient";
+import prisma from "../../share/prismaClient";
 
 const postCreateData = async (payload: Post, userId: string) => {
   const { title, description, price, location, image, categoryId } = payload;
