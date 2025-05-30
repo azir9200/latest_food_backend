@@ -85,7 +85,6 @@ model Post {
   ratings Ratings[]
  comments Comments[]
   @@map("post")
-
 }
 model Coupon {
   id                 String   @id @default(ulid())

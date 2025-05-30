@@ -5,10 +5,9 @@ import { postService } from "./post.service";
 import { sendResponse } from "../../share/sendResponse";
 
 const postCreateData = catchAsync(async (req: Request, res: Response) => {
-  console.log("post cont", req.body);
-  // const userId = req.user as JwtPayload;
-  console.log("post cont 2", req.user);
-  const result = await postService.postCreateData(req.body, );
+  console.log("hello world");
+  const userId = req.user as JwtPayload;
+  const result = await postService.postCreateData(req.body, userId.id);
   console.log("post controller", result);
   sendResponse(res, {
     statusCode: 201,

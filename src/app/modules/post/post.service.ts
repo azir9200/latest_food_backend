@@ -2,7 +2,7 @@ import { Post } from "@prisma/client";
 import { endOfMonth, format, startOfMonth, subMonths } from "date-fns";
 import prisma from "../../share/prismaClient";
 
-const postCreateData = async (payload: Post) => {
+const postCreateData = async (payload: Post, userId: string) => {
   console.log("post service", payload);
 
   const { title, description, price, location, image, categoryId } = payload;
@@ -15,7 +15,7 @@ const postCreateData = async (payload: Post) => {
       image,
       category: { connect: { id: categoryId } },
 
-      // user: { connect: { id: userId } },
+      user: { connect: { id: userId } },
     },
   });
 

@@ -8,9 +8,9 @@ router.post(
   // authorizeRole(["ADMIN", "USER"]),
   categoryController.categoryCreateData
 );
-router.get("/all-retreive", categoryController.categoryGetData);
+router.get("/all-retrieve", categoryController.categoryGetData);
 router.get(
-  "/single-retreive/:id",
+  "/single-retrieve/:id",
   authorizeRole(["ADMIN", "USER"]),
   categoryController.categorySingleGetData
 );

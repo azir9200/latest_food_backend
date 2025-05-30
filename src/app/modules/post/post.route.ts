@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { postController } from "./post.controller";
 import { authorizeRole } from "../../middleware/authorizeRole";
+import { postController } from "./post.controller";
 
 const router = Router();
 router.post(
   "/create",
-  // authorizeRole(["ADMIN", "USER"]),
+  authorizeRole(["ADMIN", "USER"]),
   postController.postCreateData
 );
 router.get(
