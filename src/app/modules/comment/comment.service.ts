@@ -3,8 +3,13 @@
 import { Comments } from "@prisma/client";
 import prisma from "../../share/prismaClient";
 
+
 const commentCreate = async (payload: Comments, userId: string) => {
+  console.log("comment ser", payload);
   const { postId, commentText } = payload;
+   if (!postId || !commentText) {
+    throw new Error("postId and commentText are required");
+  }
   const result = await prisma.comments.create({
     data: {
       userId,
@@ -12,6 +17,7 @@ const commentCreate = async (payload: Comments, userId: string) => {
       commentText,
     },
   });
+  console.log(result);
   return result;
 };
 const commentUpdate = async (commentId: string, payload: Partial<Comments>) => {

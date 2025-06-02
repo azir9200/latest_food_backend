@@ -1,11 +1,11 @@
 import { Coupon } from "@prisma/client";
-import { prisma } from "../../share/prismaClient";
+import prisma from "../../share/prismaClient";
 
 const couponCreateData = async (payload: Coupon) => {
   const { code, discountPercentage, validUntil } = payload;
   const result = await prisma.coupon.create({
     data: {
-      code: code.toUpperCase(),
+      code: code?.toUpperCase(),
       discountPercentage,
       validFrom: new Date(),
       validUntil: new Date(validUntil),

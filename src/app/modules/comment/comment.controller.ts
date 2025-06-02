@@ -13,6 +13,7 @@ const commentCreate = catchAsync(async (req: Request, res: Response) => {
     message: "comment Created successfully",
     data: result,
   });
+  console.log(result);
 });
 const commentUpdate = catchAsync(async (req: Request, res: Response) => {
   const userId = req.params.id;
