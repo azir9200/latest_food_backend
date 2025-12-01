@@ -3,11 +3,9 @@
 import { Comments } from "@prisma/client";
 import prisma from "../../share/prismaClient";
 
-
 const commentCreate = async (payload: Comments, userId: string) => {
-  console.log("comment ser", payload);
   const { postId, commentText } = payload;
-   if (!postId || !commentText) {
+  if (!postId || !commentText) {
     throw new Error("postId and commentText are required");
   }
   const result = await prisma.comments.create({
