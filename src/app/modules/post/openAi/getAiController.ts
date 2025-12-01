@@ -1,6 +1,7 @@
 import { catchAsync } from "../../../share/catchAsync";
 import { sendResponse } from "../../../share/sendResponse";
 import { getAiService } from "./getAIService";
+import { Request, Response } from "express";
 
 const getAISuggestions = catchAsync(async (req: Request, res: Response) => {
   const result = await getAiService.getAISuggestions(req.body);
@@ -11,3 +12,8 @@ const getAISuggestions = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+
+export const getAiController = {
+
+  getAISuggestions,
+};

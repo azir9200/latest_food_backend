@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { authorizeRole } from "../../middleware/authorizeRole";
 import { postController } from "./post.controller";
+import { getAiController } from "./openAi/getAiController";
 
 const router = Router();
 router.post(
@@ -44,4 +45,6 @@ router.delete(
   authorizeRole(["ADMIN"]),
   postController.postDeletedGetData
 );
+router.post("/suggestion", getAiController.getAISuggestions);
+
 export const postRoutes = router;
