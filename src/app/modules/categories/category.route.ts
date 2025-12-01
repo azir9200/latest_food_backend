@@ -11,7 +11,7 @@ router.post(
 router.get("/all-retrieve", categoryController.categoryGetData);
 router.get(
   "/single-retrieve/:id",
-  authorizeRole(["ADMIN", "USER"]),
+  // authorizeRole(["ADMIN", "USER"]),
   categoryController.categorySingleGetData
 );
 router.patch(
@@ -21,7 +21,7 @@ router.patch(
 );
 router.delete(
   "/deleted/:id",
-  authorizeRole(["ADMIN", "USER"]),
+  // authorizeRole(["ADMIN", "USER"]),
   categoryController.categoryDeletedGetData
 );
 export const categoryRoutes = router;

@@ -8,7 +8,7 @@ const postCreateData = catchAsync(async (req: Request, res: Response) => {
   console.log("hello world");
   const userId = req.user as JwtPayload;
   const result = await postService.postCreateData(req.body, userId.id);
-  console.log("post controller", result);
+  // console.log("post controller", result);
   sendResponse(res, {
     statusCode: 201,
     success: true,

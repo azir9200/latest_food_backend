@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.couponRoutes = void 0;
+const express_1 = require("express");
+const authorizeRole_1 = require("../../middleware/authorizeRole");
+const coupon_controller_1 = require("./coupon.controller");
+const router = (0, express_1.Router)();
+router.post("/create", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), coupon_controller_1.couponController.couponCreateData);
+router.get("/all-retreive", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), coupon_controller_1.couponController.couponGetData);
+router.patch("/update/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), coupon_controller_1.couponController.couponUpdateGetData);
+router.delete("/deleted/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), coupon_controller_1.couponController.couponDeletedGetData);
+exports.couponRoutes = router;

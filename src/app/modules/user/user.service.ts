@@ -3,6 +3,7 @@ import { endOfMonth, format, startOfMonth, subMonths } from "date-fns";
 import bcrypt from "bcrypt";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { makePaymentAsync, verifyPaymentAsync } from "./premiumUser";
+import { userInfo } from "../../interface/ts/userInfo";
 
 const prisma = new PrismaClient();
 const RegisterUser = async (payload: User) => {

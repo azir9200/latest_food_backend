@@ -3,7 +3,7 @@ import { endOfMonth, format, startOfMonth, subMonths } from "date-fns";
 import prisma from "../../share/prismaClient";
 
 const postCreateData = async (payload: Post, userId: string) => {
-  console.log("post service", payload);
+  // console.log("post service", payload);
 
   const { title, description, price, location, image, categoryId } = payload;
   const result = await prisma.post.create({

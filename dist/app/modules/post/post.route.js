@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.postRoutes = void 0;
+const express_1 = require("express");
+const authorizeRole_1 = require("../../middleware/authorizeRole");
+const post_controller_1 = require("./post.controller");
+const router = (0, express_1.Router)();
+router.post("/create", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), post_controller_1.postController.postCreateData);
+router.get("/all-retreive-admin", (0, authorizeRole_1.authorizeRole)(["ADMIN"]), post_controller_1.postController.postGetData);
+router.get("/all-retreive-user", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), post_controller_1.postController.postGetUserData);
+router.get("/admin/analytics", (0, authorizeRole_1.authorizeRole)(["ADMIN"]), post_controller_1.postController.analyticsData);
+router.get("/gest", post_controller_1.postController.postGetUserGestUser);
+router.get("/single-retreive/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), post_controller_1.postController.postSingleGetData);
+router.patch("/approve/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN"]), post_controller_1.postController.postApprovedGetData);
+router.patch("/premium/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN"]), post_controller_1.postController.postPremiumGetData);
+router.delete("/deleted/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN"]), post_controller_1.postController.postDeletedGetData);
+exports.postRoutes = router;
