@@ -36,6 +36,12 @@ router.get(
   authorizeRole(["ADMIN"]),
   userController.getSingleUser
 );
+router.patch("/role/:id", authorizeRole(["ADMIN"]), userController.roleUpdate);
+router.patch(
+  "/user/:id",
+  authorizeRole(["ADMIN", "USER"]),
+  userController.updateUser
+);
 router.get(
   "/single-retreive",
   authorizeRole(["ADMIN", "USER"]),

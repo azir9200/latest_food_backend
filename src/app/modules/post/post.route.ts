@@ -1,13 +1,17 @@
 import { Router } from "express";
 import { authorizeRole } from "../../middleware/authorizeRole";
 import { postController } from "./post.controller";
-import { getAiController } from "./openAi/getAiController";
 
 const router = Router();
 router.post(
   "/create",
   authorizeRole(["ADMIN", "USER"]),
   postController.postCreateData
+);
+router.patch(
+  "/update/:id",
+  authorizeRole(["ADMIN", "USER"]),
+  postController.updatePostData
 );
 router.get(
   "/all-retreive-admin",
@@ -42,9 +46,7 @@ router.patch(
 );
 router.delete(
   "/deleted/:id",
-  authorizeRole(["ADMIN"]),
+  authorizeRole(["ADMIN", "USER"]),
   postController.postDeletedGetData
 );
-router.post("/suggestion", getAiController.getAISuggestions);
-
 export const postRoutes = router;

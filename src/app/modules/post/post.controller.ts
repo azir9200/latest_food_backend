@@ -1,18 +1,27 @@
 import { Request, Response } from "express";
 import { JwtPayload } from "jsonwebtoken";
 import { catchAsync } from "../../share/catchAsync";
-import { postService } from "./post.service";
 import { sendResponse } from "../../share/sendResponse";
+import { postService } from "./post.service";
 
 const postCreateData = catchAsync(async (req: Request, res: Response) => {
-  console.log("hello world");
   const userId = req.user as JwtPayload;
   const result = await postService.postCreateData(req.body, userId.id);
-  // console.log("post controller", result);
   sendResponse(res, {
     statusCode: 201,
     success: true,
     message: "Post Created successfully",
+    data: result,
+  });
+});
+const updatePostData = catchAsync(async (req: Request, res: Response) => {
+  const userId = req.user as JwtPayload;
+  const postId = req.params.id;
+  const result = await postService.updatePostData(userId.id, req.body, postId);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Update Post successfully",
     data: result,
   });
 });
@@ -104,4 +113,5 @@ export const postController = {
   postGetUserData,
   postGetUserGestUser,
   analyticsData,
+  updatePostData,
 };

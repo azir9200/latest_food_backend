@@ -214,6 +214,27 @@ const getSingleUser = async (userId: string) => {
   });
   return result;
 };
+const updateUser = async (userId: string, payload: Partial<User>) => {
+  const exitUser = await prisma.user.findFirstOrThrow({
+    where: {
+      id: userId,
+    },
+  });
+
+  const result = await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      name: payload.name,
+      image: payload.image,
+      phone: payload.phone,
+      location: payload.location,
+      bio: payload.bio,
+    },
+  });
+  return result;
+};
 const getSingleUserToken = async (userId: string) => {
   const result = await prisma.user.findUniqueOrThrow({
     where: {
@@ -351,11 +372,14 @@ export const userService = {
   loginUser,
   verifyPremiumPayment,
   getAllUser,
+  updateUser,
   getSingleUser,
+  getSingleUserToken,
   roleUpdate,
   deletedUser,
-  refreshAccessToken,
+
   subscription,
-  getSingleUserToken,
+
+  refreshAccessToken,
   dashboardMetaData,
 };

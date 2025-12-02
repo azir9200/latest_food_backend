@@ -45,6 +45,17 @@ const roleUpdate = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const updateUser = catchAsync(async (req: Request, res: Response) => {
+  const userId = req.params.id;
+  const role = req.body;
+  const result = await userService.updateUser(userId, role);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "user updated successfully",
+    data: result,
+  });
+});
 const deletedUser = catchAsync(async (req: Request, res: Response) => {
   const userId = req.params.id;
   const result = await userService.deletedUser(userId);
@@ -138,6 +149,7 @@ export const userController = {
   verifyPremiumPayment,
   getSingleUser,
   roleUpdate,
+  updateUser,
   deletedUser,
   refreshAccessToken,
   subscription,

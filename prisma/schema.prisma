@@ -1,7 +1,8 @@
 
+
 generator client {
   provider = "prisma-client-js"
- 
+  // output   = "../generated/prisma"
 }
 
 datasource db {
@@ -17,6 +18,9 @@ role UserRole @default(USER)
 isPremium Boolean @default(false)
 image String?
 name String?
+phone String?
+location String?
+bio String?
 createdAt DateTime @default(now())
 updatedAt DateTime @updatedAt
 subscription subscription?
@@ -80,6 +84,7 @@ model Post {
   ratings Ratings[]
  comments Comments[]
   @@map("post")
+
 }
 model Coupon {
   id                 String   @id @default(ulid())
