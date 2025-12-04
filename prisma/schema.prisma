@@ -64,6 +64,19 @@ model Category {
   createdAt DateTime @default(now())
   posts Post[]
 }
+model Restaurant {
+  id        String  @id @default(uuid())
+  name      String
+  address   String
+  location  String
+  phone     String
+  image     String
+
+  posts     Post[]   
+
+  @@map("restaurant")
+}
+
 model Post {
   id          String   @id @default(uuid())
   title       String
@@ -79,6 +92,8 @@ model Post {
   createdAt   DateTime @default(now())  
   updatedAt   DateTime @updatedAt
   user        User     @relation(fields: [userId], references: [id])
+  restaurant   Restaurant?   @relation(fields: [restaurantId], references: [id])
+  restaurantId String?
   userId      String
   votes Votes[]
   ratings Ratings[]

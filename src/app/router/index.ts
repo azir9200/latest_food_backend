@@ -6,6 +6,7 @@ import { voteRoute } from "../modules/votes/votes.route";
 import { ratingRoute } from "../modules/rating/rating.route";
 import { commentRoute } from "../modules/comment/comment.route";
 import { couponRoutes } from "../modules/coupon/coupon.route";
+import { restaurantRoutes } from "../modules/restaurant/restaurant.route";
 
 const router = Router();
 const AllRoutes = [
@@ -18,10 +19,14 @@ const AllRoutes = [
     route: postRoutes,
   },
   {
+    path: "/restaurant",
+    route: restaurantRoutes,
+  },
+  {
     path: "/user",
     route: userRoutes,
   },
-   {
+  {
     path: "/vote",
     route: voteRoute,
   },
