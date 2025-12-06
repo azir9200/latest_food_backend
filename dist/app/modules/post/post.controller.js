@@ -11,17 +11,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postController = void 0;
 const catchAsync_1 = require("../../share/catchAsync");
-const post_service_1 = require("./post.service");
 const sendResponse_1 = require("../../share/sendResponse");
+const post_service_1 = require("./post.service");
 const postCreateData = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("hello world");
     const userId = req.user;
     const result = yield post_service_1.postService.postCreateData(req.body, userId.id);
-    console.log("post controller", result);
     (0, sendResponse_1.sendResponse)(res, {
         statusCode: 201,
         success: true,
         message: "Post Created successfully",
+        data: result,
+    });
+}));
+const updatePostData = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.user;
+    const postId = req.params.id;
+    const result = yield post_service_1.postService.updatePostData(userId.id, req.body, postId);
+    (0, sendResponse_1.sendResponse)(res, {
+        statusCode: 200,
+        success: true,
+        message: "Update Post successfully",
         data: result,
     });
 }));
@@ -113,4 +122,5 @@ exports.postController = {
     postGetUserData,
     postGetUserGestUser,
     analyticsData,
+    updatePostData,
 };

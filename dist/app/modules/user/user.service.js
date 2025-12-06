@@ -207,6 +207,26 @@ const getSingleUser = (userId) => __awaiter(void 0, void 0, void 0, function* ()
     });
     return result;
 });
+const updateUser = (userId, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const exitUser = yield prisma.user.findFirstOrThrow({
+        where: {
+            id: userId,
+        },
+    });
+    const result = yield prisma.user.update({
+        where: {
+            id: userId,
+        },
+        data: {
+            name: payload.name,
+            image: payload.image,
+            phone: payload.phone,
+            location: payload.location,
+            bio: payload.bio,
+        },
+    });
+    return result;
+});
 const getSingleUserToken = (userId) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield prisma.user.findUniqueOrThrow({
         where: {
@@ -325,11 +345,12 @@ exports.userService = {
     loginUser,
     verifyPremiumPayment: exports.verifyPremiumPayment,
     getAllUser,
+    updateUser,
     getSingleUser,
+    getSingleUserToken,
     roleUpdate,
     deletedUser,
-    refreshAccessToken,
     subscription,
-    getSingleUserToken,
+    refreshAccessToken,
     dashboardMetaData,
 };

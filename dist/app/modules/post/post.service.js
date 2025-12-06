@@ -16,9 +16,26 @@ exports.postService = void 0;
 const date_fns_1 = require("date-fns");
 const prismaClient_1 = __importDefault(require("../../share/prismaClient"));
 const postCreateData = (payload, userId) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("post service", payload);
     const { title, description, price, location, image, categoryId } = payload;
     const result = yield prismaClient_1.default.post.create({
+        data: {
+            title,
+            description,
+            price,
+            location,
+            image,
+            category: { connect: { id: categoryId } },
+            user: { connect: { id: userId } },
+        },
+    });
+    return result;
+});
+const updatePostData = (userId, payload, postId) => __awaiter(void 0, void 0, void 0, function* () {
+    const { title, description, price, location, image, categoryId } = payload;
+    const result = yield prismaClient_1.default.post.update({
+        where: {
+            id: postId,
+        },
         data: {
             title,
             description,
@@ -46,53 +63,26 @@ const postGetData = () => __awaiter(void 0, void 0, void 0, function* () {
     return result;
 });
 const postGetUserData = (user) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
-    const exitUser = yield prismaClient_1.default.user.findUniqueOrThrow({
-        where: {
-            id: user.id,
+    let Posts;
+    Posts = yield prismaClient_1.default.post.findMany({
+        // where: {
+        //   status: "approved",
+        // },
+        orderBy: {
+            createdAt: "desc",
         },
         include: {
-            subscription: true,
+            votes: true,
+            comments: {
+                include: {
+                    user: true,
+                },
+            },
+            ratings: true,
+            user: true,
+            category: true,
         },
     });
-    let Posts;
-    if (exitUser.isPremium && ((_a = exitUser.subscription) === null || _a === void 0 ? void 0 : _a.paymentStatus)) {
-        Posts = yield prismaClient_1.default.post.findMany({
-            where: {
-                status: "approved",
-            },
-            include: {
-                votes: true,
-                comments: {
-                    include: {
-                        user: true,
-                    },
-                },
-                ratings: true,
-                user: true,
-                category: true,
-            },
-        });
-    }
-    else {
-        Posts = yield prismaClient_1.default.post.findMany({
-            where: {
-                status: "approved",
-                isPremium: false,
-            },
-            include: {
-                votes: true,
-                comments: {
-                    include: {
-                        user: true,
-                    },
-                },
-                ratings: true,
-                user: true,
-                category: true,
-            },
-        });
-    }
     const result = Posts.map((post) => {
         const upVotes = post.votes.filter((v) => v.vote === "UP").length;
         const downVotes = post.votes.filter((v) => v.vote === "DOWN").length;
@@ -252,4 +242,5 @@ exports.postService = {
     postGetUserData,
     postGetUserGestUser,
     analyticsData,
+    updatePostData,
 };

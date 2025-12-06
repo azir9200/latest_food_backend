@@ -57,11 +57,15 @@ const postGetData = async () => {
   });
   return result;
 };
+
 const postGetUserData = async (user: any) => {
   let Posts;
   Posts = await prisma.post.findMany({
-    where: {
-      status: "approved",
+    // where: {
+    //   status: "approved",
+    // },
+    orderBy: {
+      createdAt: "desc",
     },
     include: {
       votes: true,
@@ -98,6 +102,7 @@ const postGetUserData = async (user: any) => {
 
   return result;
 };
+
 const postSingleGetData = async (postId: string) => {
   const result = await prisma.post.findUniqueOrThrow({
     where: {
@@ -239,7 +244,7 @@ const analyticsData = async () => {
       },
     },
   });
-  const categoryData = category.map((cat:any) => ({
+  const categoryData = category.map((cat: any) => ({
     name: cat.name,
     value: cat._count.posts,
   }));

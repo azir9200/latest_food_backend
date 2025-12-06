@@ -8,6 +8,7 @@ const votes_route_1 = require("../modules/votes/votes.route");
 const rating_route_1 = require("../modules/rating/rating.route");
 const comment_route_1 = require("../modules/comment/comment.route");
 const coupon_route_1 = require("../modules/coupon/coupon.route");
+const restaurant_route_1 = require("../modules/restaurant/restaurant.route");
 const router = (0, express_1.Router)();
 const AllRoutes = [
     {
@@ -17,6 +18,10 @@ const AllRoutes = [
     {
         path: "/post",
         route: post_route_1.postRoutes,
+    },
+    {
+        path: "/restaurant",
+        route: restaurant_route_1.restaurantRoutes,
     },
     {
         path: "/user",

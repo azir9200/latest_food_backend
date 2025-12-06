@@ -16,7 +16,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.commentService = void 0;
 const prismaClient_1 = __importDefault(require("../../share/prismaClient"));
 const commentCreate = (payload, userId) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("comment ser", payload);
     const { postId, commentText } = payload;
     if (!postId || !commentText) {
         throw new Error("postId and commentText are required");

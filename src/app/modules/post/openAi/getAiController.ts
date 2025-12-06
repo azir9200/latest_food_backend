@@ -5,6 +5,7 @@ import { Request, Response } from "express";
 
 const getAISuggestions = catchAsync(async (req: Request, res: Response) => {
   const result = await getAiService.getAISuggestions(req.body);
+  console.log("ai open", result);
   sendResponse(res, {
     statusCode: 200,
     success: true,
@@ -14,6 +15,5 @@ const getAISuggestions = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const getAiController = {
-
   getAISuggestions,
 };

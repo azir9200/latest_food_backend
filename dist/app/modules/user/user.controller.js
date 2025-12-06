@@ -53,6 +53,17 @@ const roleUpdate = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, 
         data: result,
     });
 }));
+const updateUser = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.params.id;
+    const role = req.body;
+    const result = yield user_service_1.userService.updateUser(userId, role);
+    (0, sendResponse_1.sendResponse)(res, {
+        statusCode: 200,
+        success: true,
+        message: "user updated successfully",
+        data: result,
+    });
+}));
 const deletedUser = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.params.id;
     const result = yield user_service_1.userService.deletedUser(userId);
@@ -144,6 +155,7 @@ exports.userController = {
     verifyPremiumPayment,
     getSingleUser,
     roleUpdate,
+    updateUser,
     deletedUser,
     refreshAccessToken,
     subscription,
