@@ -28,7 +28,7 @@ router.get(
 );
 router.get(
   "/all-retreive",
-  // authorizeRole(["ADMIN"]),
+  authorizeRole(["ADMIN"]),
   userController.getAllUser
 );
 router.get(

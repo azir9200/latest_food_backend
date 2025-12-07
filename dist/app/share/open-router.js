@@ -12,7 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.POST = exports.openai = void 0;
+exports.openai = void 0;
+exports.POST = POST;
 const openai_1 = __importDefault(require("openai"));
 exports.openai = new openai_1.default({
     baseURL: "https://openrouter.ai/api/v1",
@@ -39,4 +40,3 @@ function POST(req) {
         }
     });
 }
-exports.POST = POST;

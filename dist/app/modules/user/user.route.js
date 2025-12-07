@@ -11,9 +11,7 @@ router.get("/subscription", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]
 router.post("/refreshToken", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), user_controller_1.userController.refreshAccessToken);
 router.post("/premium", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), user_controller_1.userController.PremiumUser);
 router.get("/verify", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), user_controller_1.userController.verifyPremiumPayment);
-router.get("/all-retreive", 
-// authorizeRole(["ADMIN"]),
-user_controller_1.userController.getAllUser);
+router.get("/all-retreive", (0, authorizeRole_1.authorizeRole)(["ADMIN"]), user_controller_1.userController.getAllUser);
 router.get("/single-retreive/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN"]), user_controller_1.userController.getSingleUser);
 router.patch("/role/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN"]), user_controller_1.userController.roleUpdate);
 router.patch("/user/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), user_controller_1.userController.updateUser);
