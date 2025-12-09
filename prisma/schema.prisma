@@ -23,6 +23,7 @@ location String?
 bio String?
 createdAt DateTime @default(now())
 updatedAt DateTime @updatedAt
+  isDeleted           Boolean  @default(false)
 subscription subscription?
 posts Post[]
 votes Votes[]
@@ -71,6 +72,7 @@ model Restaurant {
   location  String
   phone     String
   image     String
+    isDeleted          Boolean  @default(false)
 
   posts     Post[]   
 
@@ -91,6 +93,7 @@ model Post {
   status      approveStatus  @default(pending)
   createdAt   DateTime @default(now())  
   updatedAt   DateTime @updatedAt
+    isDeleted           Boolean  @default(false)
   user        User     @relation(fields: [userId], references: [id])
   restaurant   Restaurant?   @relation(fields: [restaurantId], references: [id])
   restaurantId String?

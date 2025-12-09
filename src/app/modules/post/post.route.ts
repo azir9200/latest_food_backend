@@ -49,4 +49,8 @@ router.delete(
   authorizeRole(["ADMIN", "USER"]),
   postController.postDeletedGetData
 );
+router.delete(
+    '/soft/:id',
+  authorizeRole(["ADMIN", "USER"]),
+    postController.softDelete);
 export const postRoutes = router;

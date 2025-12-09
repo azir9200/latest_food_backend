@@ -251,6 +251,14 @@ const analyticsData = async () => {
 
   return { AnalyticsArray, visitorData, categoryData };
 };
+export const softDeletePost = async (id: string) => {
+  return await prisma.post.update({
+    where: { id },
+    data: {
+      isDeleted: true,
+    },
+  });
+};
 
 export const postService = {
   postCreateData,
@@ -263,4 +271,5 @@ export const postService = {
   postGetUserGestUser,
   analyticsData,
   updatePostData,
+  softDeletePost,
 };

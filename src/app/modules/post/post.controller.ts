@@ -103,6 +103,16 @@ const analyticsData = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const softDelete = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const result = await postService.softDeletePost(id);
+    sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        message: 'Post soft deleted successfully',
+        data: result,
+    });
+});
 export const postController = {
   postCreateData,
   postGetData,
@@ -114,4 +124,5 @@ export const postController = {
   postGetUserGestUser,
   analyticsData,
   updatePostData,
+  softDelete,
 };
