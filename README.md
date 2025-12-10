@@ -1,24 +1,24 @@
 ### Project Name: FoodBook Backend : latest_food_backend
 
-## A modular and scalable backend API built with TypeScript, Express, PostgreSQL, Prisma ORM, JWT, Bcrypt, and clean project architecture. This backend powers the FoodBook application by managing users, posts, categories, comments, ratings, votes, restaurant data, and more.
+-- A modular and scalable backend API built with TypeScript, Express, PostgreSQL, Prisma ORM, JWT, Bcrypt, and clean project architecture. This backend powers the FoodBook application by managing users, posts, categories, comments, ratings, votes, restaurant data, and more.
 
 ## Tech Stack & Why They Are Used
 
-# TypeScript : Used for static typing and clean, maintainable code. Helps prevent bugs with type‑safety and improved IntelliSense. Makes the codebase scalable for long‑term development.
+- TypeScript : Used for static typing and clean, maintainable code. Helps prevent bugs with type‑safety and improved IntelliSense. Makes the codebase scalable for long‑term development.
 
-# Express.js : Lightweight and fast web framework. Perfect for building REST APIs. Easy to structure into a modular folder system.
+- Express.js : Lightweight and fast web framework. Perfect for building REST APIs. Easy to structure into a modular folder system.
 
-# PostgreSQL: Reliable, powerful relational database. Great support for relations: posts, categories, comments, ratings. Excellent performance for production systems.
+- PostgreSQL: Reliable, powerful relational database. Great support for relations: posts, categories, comments, ratings. Excellent performance for production systems.
 
-# Prisma ORM : Modern ORM for database modeling and queries. Prisma Client auto‑generates type‑safe queries. Super easy database migrations and schema updates.
+- Prisma ORM : Modern ORM for database modeling and queries. Prisma Client auto‑generates type‑safe queries. Super easy database migrations and schema updates.
 
-# JWT (JSON Web Tokens) : Used for user authentication., Secure, stateless login system. Works perfectly with frontend applications.
+- JWT (JSON Web Tokens) : Used for user authentication., Secure, stateless login system. Works perfectly with frontend applications.
 
-# Bcrypt: Used for secure password hashing. Ensures user passwords are fully protected in the database.
+- Bcrypt: Used for secure password hashing. Ensures user passwords are fully protected in the database.
 
-# Modular Architecture: My project follows a clean, scalable modular architecture:
+- Modular Architecture: My project follows a clean, scalable modular architecture:
 
-# Each feature (Post, User, Category, Rating, Comment, Restaurant, Voting, etc.) has: controller, service, route, interface, validation.
+-- Each feature (Post, User, Category, Rating, Comment, Restaurant, Voting, etc.) has: controller, service, route, interface, validation.
 
 Entry Points (app.ts & server.ts)
 
@@ -28,7 +28,7 @@ server.ts → Starts the server and handles database connection.
 
 This separation improves clarity and reusability.
 
-📂 Project Structure
+## 📂 Project Structure
 src/
 ├── app.ts
 ├── server.ts
@@ -73,7 +73,8 @@ src/
 
 - Follow these steps to run the backend on your machine.
 
-- Clone the repository :  
+##  Clone the repository : 
+ 
    -- git clone YOUR_REPO_LINK
 - Navigate into the project folder
   cd your-backend-folder
@@ -99,7 +100,9 @@ API Testing
 
 You can test the API using: Postman, Thunder Client, Insomnia,
 
-# API base URL (local): http://localhost:5000/api/v1
+# API base URL (local): 
+
+http://localhost:5000/api/v1
 
 - Error Handling & Validation
 
