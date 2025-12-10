@@ -7,6 +7,7 @@ import { ratingRoute } from "../modules/rating/rating.route";
 import { commentRoute } from "../modules/comment/comment.route";
 import { couponRoutes } from "../modules/coupon/coupon.route";
 import { restaurantRoutes } from "../modules/restaurant/restaurant.route";
+import { deletedDataRoutes } from "../modules/DeletedData/route.deletedData";
 
 const router = Router();
 const AllRoutes = [
@@ -42,7 +43,12 @@ const AllRoutes = [
     path: "/coupon",
     route: couponRoutes,
   },
+  {
+    path: "/softDelete",
+    route: deletedDataRoutes,
+  },
 ];
 
 AllRoutes.forEach((item) => router.use(item.path, item.route));
 export default router;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
