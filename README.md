@@ -29,26 +29,29 @@ server.ts → Starts the server and handles database connection.
 This separation improves clarity and reusability.
 
 ## 📂 Project Structure
-src/
-├── app.ts
-├── server.ts
-├── modules/
-│ ├── post/
-│ │ ├── post.controller.ts
-│ │ ├── post.service.ts
-│ │ ├── post.route.ts
-│ │ └── interface/
-│ ├── categories/
-│ ├── comment/
-│ ├── rating/
-│ ├── restaurant/
-│ ├── votes/
-│ └── DeletedData/
-├── middleware/
-├── router/
-├── prisma/
-├── utils/
-└── share/
+
+            src/
+            ├── config/
+            ├── middleware/
+            ├── modules/
+            │ ├── post/
+            │ │ ├── post.controller.ts
+            │ │ ├── post.service.ts
+            │ │ ├── post.route.ts
+            │ │ └── interface/
+            │ ├── categories/
+            │ ├── comment/
+            │ ├── rating/
+            │ ├── restaurant/
+            │ ├── votes/
+            │ └── DeletedData/
+            ├── router/
+            ├── prisma/
+            ├── utils/
+            ├── app.ts
+            ├── server.ts
+            └── share/
+
 🧪 Features
 
 - User authentication & authorization (JWT)
@@ -73,9 +76,10 @@ src/
 
 - Follow these steps to run the backend on your machine.
 
-##  Clone the repository : 
- 
-   -- git clone YOUR_REPO_LINK
+## Clone the repository :
+
+-- git clone YOUR_REPO_LINK
+
 - Navigate into the project folder
   cd your-backend-folder
 - Install dependencies
@@ -100,7 +104,7 @@ API Testing
 
 You can test the API using: Postman, Thunder Client, Insomnia,
 
-# API base URL (local): 
+# API base URL (local):
 
 http://localhost:5000/api/v1
 
