@@ -15,4 +15,5 @@ router.get("/single-retreive/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN", 
 router.patch("/approve/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN"]), post_controller_1.postController.postApprovedGetData);
 router.patch("/premium/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN"]), post_controller_1.postController.postPremiumGetData);
 router.delete("/deleted/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), post_controller_1.postController.postDeletedGetData);
+router.delete('/soft/:id', (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), post_controller_1.postController.softDelete);
 exports.postRoutes = router;

@@ -8,11 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userController = void 0;
 const sendResponse_1 = require("../../share/sendResponse");
 const catchAsync_1 = require("../../share/catchAsync");
 const user_service_1 = require("./user.service");
+const ApiError_1 = __importDefault(require("../../apiError/ApiError"));
 const getAllUser = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_service_1.userService.getAllUser();
     (0, sendResponse_1.sendResponse)(res, {
@@ -72,6 +76,26 @@ const deletedUser = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0,
         success: true,
         message: "user deleted successfully",
         data: result,
+    });
+}));
+const softDelete = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    if (!req.user) {
+        throw new ApiError_1.default(401, "Unauthorized");
+    }
+    // 🔐 prevent admin deleting himself
+    if ((req === null || req === void 0 ? void 0 : req.user.id) === id) {
+        throw new ApiError_1.default(400, "Admin cannot delete own account");
+    }
+    const result = yield user_service_1.userService.softDeleteUser(id);
+    if (result.count === 0) {
+        throw new ApiError_1.default(404, "User not found or already deleted");
+    }
+    (0, sendResponse_1.sendResponse)(res, {
+        statusCode: 200,
+        success: true,
+        message: "User deleted successfully",
+        data: null,
     });
 }));
 const RegisterUser = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -157,6 +181,7 @@ exports.userController = {
     roleUpdate,
     updateUser,
     deletedUser,
+    softDelete,
     refreshAccessToken,
     subscription,
     getSingleUserToken,

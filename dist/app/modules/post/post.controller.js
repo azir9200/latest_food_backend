@@ -8,11 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postController = void 0;
 const catchAsync_1 = require("../../share/catchAsync");
 const sendResponse_1 = require("../../share/sendResponse");
 const post_service_1 = require("./post.service");
+const ApiError_1 = __importDefault(require("../../apiError/ApiError"));
 const postCreateData = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.user;
     const result = yield post_service_1.postService.postCreateData(req.body, userId.id);
@@ -112,6 +116,19 @@ const analyticsData = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 
         data: result,
     });
 }));
+const softDelete = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const result = yield post_service_1.postService.softDeletePost(id);
+    if (result.count === 0) {
+        throw new ApiError_1.default(404, "Post not found or already deleted");
+    }
+    (0, sendResponse_1.sendResponse)(res, {
+        statusCode: 200,
+        success: true,
+        message: 'Post soft deleted successfully',
+        data: result,
+    });
+}));
 exports.postController = {
     postCreateData,
     postGetData,
@@ -123,4 +140,5 @@ exports.postController = {
     postGetUserGestUser,
     analyticsData,
     updatePostData,
+    softDelete,
 };

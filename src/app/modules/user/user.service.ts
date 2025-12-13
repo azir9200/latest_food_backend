@@ -274,6 +274,21 @@ const deletedUser = async (userId: string) => {
   });
   return result;
 };
+
+export const softDeleteUser = async (id: string) => {
+  return await prisma.user.updateMany({
+    where: {
+      id,
+      isDeleted: false,
+    },
+    
+    data: {
+      isDeleted: true,
+      deletedAt: new Date(),
+    },
+  });
+};
+
 const subscription = async (userId: string) => {
   const result = await prisma.subscription.findUniqueOrThrow({
     where: {
@@ -377,9 +392,8 @@ export const userService = {
   getSingleUserToken,
   roleUpdate,
   deletedUser,
-
+  softDeleteUser,
   subscription,
-
   refreshAccessToken,
   dashboardMetaData,
 };

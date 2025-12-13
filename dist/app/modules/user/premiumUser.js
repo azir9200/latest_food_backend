@@ -9,7 +9,6 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const Shurjopay = new shurjopay_1.default();
 Shurjopay.config(process.env.SP_ENDPOINT, process.env.SP_USERNAME, process.env.SP_PASSWORD, process.env.SP_PREFIX, process.env.SP_RETURN_URL);
-console.log(Shurjopay);
 const makePaymentAsync = (payload) => {
     return new Promise((resolve, reject) => {
         Shurjopay.makePayment(payload, (response) => resolve(response), (error) => reject(error));

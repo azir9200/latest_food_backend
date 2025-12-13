@@ -24,6 +24,7 @@ bio String?
 createdAt DateTime @default(now())
 updatedAt DateTime @updatedAt
   isDeleted           Boolean  @default(false)
+   deletedAt   DateTime?
 subscription subscription?
 posts Post[]
 votes Votes[]
@@ -62,6 +63,8 @@ model Category {
   id    String @id @default(uuid())
   name  String @unique
   image String?
+  isDeleted   Boolean  @default(false)
+   deletedAt   DateTime?
   createdAt DateTime @default(now())
   posts Post[]
 }
@@ -72,8 +75,8 @@ model Restaurant {
   location  String
   phone     String
   image     String
-    isDeleted          Boolean  @default(false)
-
+  isDeleted  Boolean  @default(false)
+ deletedAt   DateTime?
   posts     Post[]   
 
   @@map("restaurant")
@@ -94,6 +97,7 @@ model Post {
   createdAt   DateTime @default(now())  
   updatedAt   DateTime @updatedAt
     isDeleted           Boolean  @default(false)
+     deletedAt   DateTime?
   user        User     @relation(fields: [userId], references: [id])
   restaurant   Restaurant?   @relation(fields: [restaurantId], references: [id])
   restaurantId String?
@@ -153,6 +157,7 @@ model Ratings {
 enum UserRole {
 USER
 ADMIN
+SUPER_ADMIN
 }
 enum votetypes {
 UP

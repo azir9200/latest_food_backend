@@ -17,6 +17,14 @@ const getSoftDeletedPosts = async () => {
   });
   return result;
 };
+const getSoftDeletedCategory = async () => {
+  const result = await prisma.category.findMany({
+    where: {
+      isDeleted: true,
+    },
+  });
+  return result;
+};
 const getSoftDeletedUsers = async () => {
   const result = await prisma.user.findMany({
     where: {
@@ -24,7 +32,7 @@ const getSoftDeletedUsers = async () => {
     },
     include: {
       posts: true,
-      category: true,
+
       comments: {
         include: {
           user: true,
@@ -35,8 +43,7 @@ const getSoftDeletedUsers = async () => {
   return result;
 };
 export const DeletedDataService = {
-    getSoftDeletedPosts,
-    getSoftDeletedUsers,
-    
-  
+  getSoftDeletedPosts,
+  getSoftDeletedCategory,
+  getSoftDeletedUsers,
 };

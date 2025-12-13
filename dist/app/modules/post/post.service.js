@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postService = void 0;
+exports.postService = exports.softDeletePost = void 0;
 const date_fns_1 = require("date-fns");
 const prismaClient_1 = __importDefault(require("../../share/prismaClient"));
 const postCreateData = (payload, userId) => __awaiter(void 0, void 0, void 0, function* () {
@@ -232,6 +232,19 @@ const analyticsData = () => __awaiter(void 0, void 0, void 0, function* () {
     }));
     return { AnalyticsArray, visitorData, categoryData };
 });
+const softDeletePost = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield prismaClient_1.default.post.updateMany({
+        where: {
+            id,
+            isDeleted: false,
+        },
+        data: {
+            isDeleted: true,
+            deletedAt: new Date(),
+        },
+    });
+});
+exports.softDeletePost = softDeletePost;
 exports.postService = {
     postCreateData,
     postGetData,
@@ -243,4 +256,5 @@ exports.postService = {
     postGetUserGestUser,
     analyticsData,
     updatePostData,
+    softDeletePost: exports.softDeletePost,
 };

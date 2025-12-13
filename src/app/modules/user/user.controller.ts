@@ -2,7 +2,8 @@ import { Request, Response } from "express";
 import { JwtPayload } from "jsonwebtoken";
 import { sendResponse } from "../../share/sendResponse";
 import { catchAsync } from "../../share/catchAsync";
-import { userService } from "./user.service";
+import { softDeleteUser, userService } from "./user.service";
+import ApiError from "../../apiError/ApiError";
 
 const getAllUser = catchAsync(async (req: Request, res: Response) => {
   const result = await userService.getAllUser();
@@ -66,6 +67,31 @@ const deletedUser = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const softDelete = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  if (!req.user) {
+    throw new ApiError(401, "Unauthorized");
+  }
+
+  // 🔐 prevent admin deleting himself
+  if (req?.user.id === id) {
+    throw new ApiError(400, "Admin cannot delete own account");
+  }
+
+  const result = await userService.softDeleteUser(id);
+
+  if (result.count === 0) {
+    throw new ApiError(404, "User not found or already deleted");
+  }
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "User deleted successfully",
+    data: null,
+  });
+});
+
 const RegisterUser = catchAsync(async (req: Request, res: Response) => {
   const result = await userService.RegisterUser(req.body);
   sendResponse(res, {
@@ -151,6 +177,7 @@ export const userController = {
   roleUpdate,
   updateUser,
   deletedUser,
+  softDelete,
   refreshAccessToken,
   subscription,
   getSingleUserToken,

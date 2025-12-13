@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { catchAsync } from "../../share/catchAsync";
 import { sendResponse } from "../../share/sendResponse";
 import { categoryService } from "./category.service";
+import ApiError from "../../apiError/ApiError";
 
 const categoryCreateData = catchAsync(async (req: Request, res: Response) => {
   console.log("cate contr", req.body);
@@ -61,10 +62,24 @@ const categoryDeletedGetData = catchAsync(
     });
   }
 );
+const softDelete = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await categoryService.softDeleteCategory(id);
+  if (result.count === 0) {
+    throw new ApiError(404, "Category not found or already deleted");
+  }
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Categoryt soft deleted successfully",
+    data: result,
+  });
+});
 export const categoryController = {
   categoryCreateData,
   categoryGetData,
   categorySingleGetData,
   categoryDeletedGetData,
   categoryUpdateGetData,
+  softDelete,
 };

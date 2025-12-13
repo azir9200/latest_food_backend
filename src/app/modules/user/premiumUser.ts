@@ -9,7 +9,7 @@ Shurjopay.config(
   process.env.SP_PREFIX!,
   process.env.SP_RETURN_URL!
 );
-console.log(Shurjopay);
+
 export const makePaymentAsync = (payload: any): Promise<PaymentResponse> => {
   return new Promise((resolve, reject) => {
     Shurjopay.makePayment(

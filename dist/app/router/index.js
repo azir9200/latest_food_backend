@@ -9,6 +9,7 @@ const rating_route_1 = require("../modules/rating/rating.route");
 const comment_route_1 = require("../modules/comment/comment.route");
 const coupon_route_1 = require("../modules/coupon/coupon.route");
 const restaurant_route_1 = require("../modules/restaurant/restaurant.route");
+const route_deletedData_1 = require("../modules/DeletedData/route.deletedData");
 const router = (0, express_1.Router)();
 const AllRoutes = [
     {
@@ -42,6 +43,10 @@ const AllRoutes = [
     {
         path: "/coupon",
         route: coupon_route_1.couponRoutes,
+    },
+    {
+        path: "/softDelete",
+        route: route_deletedData_1.deletedDataRoutes,
     },
 ];
 AllRoutes.forEach((item) => router.use(item.path, item.route));

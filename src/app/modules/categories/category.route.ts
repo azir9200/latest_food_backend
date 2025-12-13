@@ -21,7 +21,12 @@ router.patch(
 );
 router.delete(
   "/deleted/:id",
-  // authorizeRole(["ADMIN", "USER"]),
+  authorizeRole(["ADMIN", "USER"]),
   categoryController.categoryDeletedGetData
+);
+router.delete(
+  "/soft/:id",
+  authorizeRole(["ADMIN", "USER"]),
+  categoryController.softDelete
 );
 export const categoryRoutes = router;

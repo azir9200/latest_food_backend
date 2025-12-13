@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.categoryService = void 0;
+exports.categoryService = exports.softDeleteCategory = void 0;
 const prismaClient_1 = __importDefault(require("../../share/prismaClient"));
 const categoryCreateData = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("service cate", payload);
@@ -62,10 +62,24 @@ const categoryDeletedGetData = (categoryId) => __awaiter(void 0, void 0, void 0,
     });
     return result;
 });
+const softDeleteCategory = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield prismaClient_1.default.category.updateMany({
+        where: {
+            id,
+            isDeleted: false,
+        },
+        data: {
+            isDeleted: true,
+            deletedAt: new Date(),
+        },
+    });
+});
+exports.softDeleteCategory = softDeleteCategory;
 exports.categoryService = {
     categoryCreateData,
     categoryGetData,
     categorySingleGetData,
     categoryDeletedGetData,
     categoryUpdateGetData,
+    softDeleteCategory: exports.softDeleteCategory,
 };

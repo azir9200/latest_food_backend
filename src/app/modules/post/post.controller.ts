@@ -3,6 +3,7 @@ import { JwtPayload } from "jsonwebtoken";
 import { catchAsync } from "../../share/catchAsync";
 import { sendResponse } from "../../share/sendResponse";
 import { postService } from "./post.service";
+import ApiError from "../../apiError/ApiError";
 
 const postCreateData = catchAsync(async (req: Request, res: Response) => {
   const userId = req.user as JwtPayload;
@@ -86,6 +87,7 @@ const postApprovedGetData = catchAsync(async (req: Request, res: Response) => {
 });
 const postDeletedGetData = catchAsync(async (req: Request, res: Response) => {
   const postId = req.params.id;
+  
   const result = await postService.postDeletedGetData(postId);
   sendResponse(res, {
     statusCode: 200,
@@ -106,6 +108,9 @@ const analyticsData = catchAsync(async (req: Request, res: Response) => {
 const softDelete = catchAsync(async (req: Request, res: Response) => {
     const { id } = req.params;
     const result = await postService.softDeletePost(id);
+    if (result.count === 0) {
+  throw new ApiError(404, "Post not found or already deleted");
+}
     sendResponse(res, {
         statusCode: 200,
         success: true,

@@ -23,7 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userService = exports.verifyPremiumPayment = void 0;
+exports.userService = exports.softDeleteUser = exports.verifyPremiumPayment = void 0;
 const client_1 = require("@prisma/client");
 const date_fns_1 = require("date-fns");
 const bcrypt_1 = __importDefault(require("bcrypt"));
@@ -265,6 +265,19 @@ const deletedUser = (userId) => __awaiter(void 0, void 0, void 0, function* () {
     });
     return result;
 });
+const softDeleteUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield prisma.user.updateMany({
+        where: {
+            id,
+            isDeleted: false,
+        },
+        data: {
+            isDeleted: true,
+            deletedAt: new Date(),
+        },
+    });
+});
+exports.softDeleteUser = softDeleteUser;
 const subscription = (userId) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield prisma.subscription.findUniqueOrThrow({
         where: {
@@ -350,6 +363,7 @@ exports.userService = {
     getSingleUserToken,
     roleUpdate,
     deletedUser,
+    softDeleteUser: exports.softDeleteUser,
     subscription,
     refreshAccessToken,
     dashboardMetaData,

@@ -14,6 +14,16 @@ const getSoftDeletedPosts = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const getSoftDeletedCategory = catchAsync(async (req: Request, res: Response) => {
+  const result = await DeletedDataService.getSoftDeletedPosts(); // service method
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Soft deleted Category retrieved successfully",
+    data: result,
+  });
+});
 const getSoftDeletedUsers = catchAsync(async (req: Request, res: Response) => {
   const result = await DeletedDataService.getSoftDeletedUsers(); 
 
@@ -27,5 +37,7 @@ const getSoftDeletedUsers = catchAsync(async (req: Request, res: Response) => {
 
 export const DeleteDataController = {
   getSoftDeletedPosts,
+    getSoftDeletedCategory,
   getSoftDeletedUsers,
+
 };

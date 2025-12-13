@@ -252,10 +252,14 @@ const analyticsData = async () => {
   return { AnalyticsArray, visitorData, categoryData };
 };
 export const softDeletePost = async (id: string) => {
-  return await prisma.post.update({
-    where: { id },
+  return await prisma.post.updateMany({
+    where: {
+      id,
+      isDeleted: false,
+    },
     data: {
       isDeleted: true,
+      deletedAt: new Date(),
     },
   });
 };

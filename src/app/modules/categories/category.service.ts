@@ -51,10 +51,23 @@ const categoryDeletedGetData = async (categoryId: string) => {
   });
   return result;
 };
+export const softDeleteCategory = async (id: string) => {
+  return await prisma.category.updateMany({
+    where: {
+      id,
+      isDeleted: false,
+    },
+    data: {
+      isDeleted: true,
+      deletedAt: new Date(),
+    },
+  });
+};
 export const categoryService = {
   categoryCreateData,
   categoryGetData,
   categorySingleGetData,
   categoryDeletedGetData,
   categoryUpdateGetData,
+  softDeleteCategory,
 };
