@@ -30,9 +30,11 @@ const categorySingleGetData = async (categoryId: string) => {
   return result;
 };
 const categoryUpdateGetData = async (name: string, categoryId: string) => {
+  
   const existing = await prisma.category.findUniqueOrThrow({
     where: { id: categoryId },
   });
+
   const result = await prisma.category.update({
     where: {
       id: categoryId,

@@ -53,11 +53,7 @@ router.delete(
   authorizeRole(["ADMIN"]),
   userController.deletedUser
 );
-router.delete(
-  "/soft/:id",
-  authorizeRole(["ADMIN"]),
-  userController.deletedUser
-);
+router.patch("/soft/:id", authorizeRole(["ADMIN"]), userController.softDelete);
 router.get(
   "/admin/metadata",
   authorizeRole(["ADMIN"]),

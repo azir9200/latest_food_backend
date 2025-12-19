@@ -4,7 +4,7 @@ import { catchAsync } from "../../share/catchAsync";
 import { sendResponse } from "../../share/sendResponse";
 import { commentService } from "./comment.service";
 const commentCreate = catchAsync(async (req: Request, res: Response) => {
-  console.log("comment con", req.body);
+  
   const userId = req.user as JwtPayload;
   const result = await commentService.commentCreate(req.body, userId.id);
   sendResponse(res, {

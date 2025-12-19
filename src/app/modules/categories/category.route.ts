@@ -24,7 +24,7 @@ router.delete(
   authorizeRole(["ADMIN", "USER"]),
   categoryController.categoryDeletedGetData
 );
-router.delete(
+router.patch(
   "/soft/:id",
   authorizeRole(["ADMIN", "USER"]),
   categoryController.softDelete

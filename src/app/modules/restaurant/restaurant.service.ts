@@ -1,38 +1,68 @@
-import { Restaurant } from "@prisma/client";
 import prisma from "../../share/prismaClient";
 
-const createRestaurant = async (payload: Restaurant) => {
-  const { name, address, location, phone, image } = payload;
-  const result = await prisma.restaurant.create({
+const createRestaurant = async (data: any, ownerId: string) => {
+  return await prisma.restaurant.create({
     data: {
-      name,
-      address,
-      location,
-
-      phone,
-      image,
+      name: data.name,
+      description: data.description,
+      images: data.images || [],
+      location: data.location,
+      address: data.address,
+      phone: data.phone || null,
+      email: data.email || null,
+      website: data.website || null,
+      openingHours: data.openingHours || null,
+      specialties: data.specialties || [],
+      highlights: data.highlights || [],
+      owner: {
+        connect: { id: ownerId },
+      },
     },
   });
-  console.log(result);
-  return result;
 };
 
-export const getAllFromDB = async () => {
-  try {
-    const restaurants = await prisma.restaurant.findMany({
-      orderBy: {
-        name: "asc",
-      },
-    });
+// Get all Restaurants
+const getAllRestaurants = async () => {
+  return await prisma.restaurant.findMany({
+    include: { menuItems: true, owner: true },
+  });
+};
 
-    return restaurants;
-  } catch (error) {
-    console.error("Error fetching restaurants:", error);
-    throw new Error("Failed to fetch restaurants");
-  }
+const getRestaurantById = async (ownerId: string) => {
+  return await prisma.restaurant.findMany({
+    where: { ownerId },
+    include: { menuItems: true },
+  });
+};
+
+// Get single Restaurant
+const getRestaurantByIdParams = async (id: string) => {
+  return await prisma.restaurant.findUnique({
+    where: { id },
+    include: { menuItems: true },
+  });
+};
+
+// Update Restaurant
+const updateRestaurant = async (id: string, data: any) => {
+  return await prisma.restaurant.update({
+    where: { id },
+    data,
+  });
+};
+
+// Delete Restaurant
+const deleteRestaurant = async (id: string) => {
+  return await prisma.restaurant.delete({
+    where: { id },
+  });
 };
 
 export const restaurantService = {
   createRestaurant,
-  getAllFromDB,
+  getAllRestaurants,
+  getRestaurantById,
+  updateRestaurant,
+  deleteRestaurant,
+  getRestaurantByIdParams,
 };

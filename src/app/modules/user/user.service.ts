@@ -197,6 +197,9 @@ export const verifyPremiumPayment = async (user_id: string, userId: string) => {
 };
 const getAllUser = async () => {
   const result = await prisma.user.findMany({
+    where: {
+      isDeleted: false,
+    },
     include: {
       subscription: true,
     },
@@ -281,7 +284,7 @@ export const softDeleteUser = async (id: string) => {
       id,
       isDeleted: false,
     },
-    
+
     data: {
       isDeleted: true,
       deletedAt: new Date(),

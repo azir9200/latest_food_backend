@@ -8,6 +8,7 @@ import { commentRoute } from "../modules/comment/comment.route";
 import { couponRoutes } from "../modules/coupon/coupon.route";
 import { restaurantRoutes } from "../modules/restaurant/restaurant.route";
 import { deletedDataRoutes } from "../modules/DeletedData/route.deletedData";
+import { menuItemtRoutes } from "../modules/menuItem/menuIrem.route";
 
 const router = Router();
 const AllRoutes = [
@@ -22,6 +23,10 @@ const AllRoutes = [
   {
     path: "/restaurant",
     route: restaurantRoutes,
+  },
+  {
+    path: "/menu",
+    route: menuItemtRoutes,
   },
   {
     path: "/user",
@@ -51,4 +56,3 @@ const AllRoutes = [
 
 AllRoutes.forEach((item) => router.use(item.path, item.route));
 export default router;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
