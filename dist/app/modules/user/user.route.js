@@ -18,6 +18,6 @@ router.patch("/user/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]),
 router.get("/single-retreive", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), user_controller_1.userController.getSingleUserToken);
 router.patch("/role/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN"]), user_controller_1.userController.roleUpdate);
 router.delete("/deleted/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN"]), user_controller_1.userController.deletedUser);
-router.delete("/soft/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN"]), user_controller_1.userController.deletedUser);
+router.patch("/soft/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN"]), user_controller_1.userController.softDelete);
 router.get("/admin/metadata", (0, authorizeRole_1.authorizeRole)(["ADMIN"]), user_controller_1.userController.dashboardMetaData);
 exports.userRoutes = router;

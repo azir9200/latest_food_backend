@@ -24,6 +24,9 @@ const createRestaurant = async (data: any, ownerId: string) => {
 // Get all Restaurants
 const getAllRestaurants = async () => {
   return await prisma.restaurant.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
     include: { menuItems: true, owner: true },
   });
 };

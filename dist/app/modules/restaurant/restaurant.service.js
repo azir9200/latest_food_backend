@@ -12,38 +12,68 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.restaurantService = exports.getAllFromDB = void 0;
+exports.restaurantService = void 0;
 const prismaClient_1 = __importDefault(require("../../share/prismaClient"));
-const createRestaurant = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, address, location, phone, image } = payload;
-    const result = yield prismaClient_1.default.restaurant.create({
+const createRestaurant = (data, ownerId) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield prismaClient_1.default.restaurant.create({
         data: {
-            name,
-            address,
-            location,
-            phone,
-            image,
+            name: data.name,
+            description: data.description,
+            images: data.images || [],
+            location: data.location,
+            address: data.address,
+            phone: data.phone || null,
+            email: data.email || null,
+            website: data.website || null,
+            openingHours: data.openingHours || null,
+            specialties: data.specialties || [],
+            highlights: data.highlights || [],
+            owner: {
+                connect: { id: ownerId },
+            },
         },
     });
-    console.log(result);
-    return result;
 });
-const getAllFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const restaurants = yield prismaClient_1.default.restaurant.findMany({
-            orderBy: {
-                name: "asc",
-            },
-        });
-        return restaurants;
-    }
-    catch (error) {
-        console.error("Error fetching restaurants:", error);
-        throw new Error("Failed to fetch restaurants");
-    }
+// Get all Restaurants
+const getAllRestaurants = () => __awaiter(void 0, void 0, void 0, function* () {
+    return yield prismaClient_1.default.restaurant.findMany({
+        orderBy: {
+            createdAt: "desc",
+        },
+        include: { menuItems: true, owner: true },
+    });
 });
-exports.getAllFromDB = getAllFromDB;
+const getRestaurantById = (ownerId) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield prismaClient_1.default.restaurant.findMany({
+        where: { ownerId },
+        include: { menuItems: true },
+    });
+});
+// Get single Restaurant
+const getRestaurantByIdParams = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield prismaClient_1.default.restaurant.findUnique({
+        where: { id },
+        include: { menuItems: true },
+    });
+});
+// Update Restaurant
+const updateRestaurant = (id, data) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield prismaClient_1.default.restaurant.update({
+        where: { id },
+        data,
+    });
+});
+// Delete Restaurant
+const deleteRestaurant = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield prismaClient_1.default.restaurant.delete({
+        where: { id },
+    });
+});
 exports.restaurantService = {
     createRestaurant,
-    getAllFromDB: exports.getAllFromDB,
+    getAllRestaurants,
+    getRestaurantById,
+    updateRestaurant,
+    deleteRestaurant,
+    getRestaurantByIdParams,
 };

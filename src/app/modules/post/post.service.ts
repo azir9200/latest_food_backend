@@ -154,8 +154,11 @@ const postDeletedGetData = async (postId: string) => {
 };
 const postGetUserGestUser = async () => {
   const posts = await prisma.post.findMany({
-    where: {
-      status: "approved",
+    // where: {
+    //   status: "approved",
+    // },
+    orderBy: {
+      createdAt: "desc",
     },
     include: {
       votes: true,

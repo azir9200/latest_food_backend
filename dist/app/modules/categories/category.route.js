@@ -14,5 +14,5 @@ router.get("/single-retrieve/:id",
 category_controller_1.categoryController.categorySingleGetData);
 router.patch("/update/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), category_controller_1.categoryController.categoryUpdateGetData);
 router.delete("/deleted/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), category_controller_1.categoryController.categoryDeletedGetData);
-router.delete("/soft/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), category_controller_1.categoryController.softDelete);
+router.patch("/soft/:id", (0, authorizeRole_1.authorizeRole)(["ADMIN", "USER"]), category_controller_1.categoryController.softDelete);
 exports.categoryRoutes = router;

@@ -31,6 +31,7 @@ const getAllRestaurants = catchAsync(async (req: Request, res: Response) => {
 const getRestaurantById = catchAsync(async (req: Request, res: Response) => {
   const userId = req.user as JwtPayload;
   const result = await restaurantService.getRestaurantById(userId.id);
+  console.log("res cintrol", result);
   sendResponse(res, {
     statusCode: 200,
     message: "Restaurants by ID fetched successfully",

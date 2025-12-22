@@ -14,7 +14,6 @@ const catchAsync_1 = require("../../share/catchAsync");
 const sendResponse_1 = require("../../share/sendResponse");
 const comment_service_1 = require("./comment.service");
 const commentCreate = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("comment con", req.body);
     const userId = req.user;
     const result = yield comment_service_1.commentService.commentCreate(req.body, userId.id);
     (0, sendResponse_1.sendResponse)(res, {

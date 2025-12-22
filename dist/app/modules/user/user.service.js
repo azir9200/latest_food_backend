@@ -190,6 +190,9 @@ const verifyPremiumPayment = (user_id, userId) => __awaiter(void 0, void 0, void
 exports.verifyPremiumPayment = verifyPremiumPayment;
 const getAllUser = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield prisma.user.findMany({
+        where: {
+            isDeleted: false,
+        },
         include: {
             subscription: true,
         },

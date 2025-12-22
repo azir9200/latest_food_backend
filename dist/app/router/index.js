@@ -10,6 +10,7 @@ const comment_route_1 = require("../modules/comment/comment.route");
 const coupon_route_1 = require("../modules/coupon/coupon.route");
 const restaurant_route_1 = require("../modules/restaurant/restaurant.route");
 const route_deletedData_1 = require("../modules/DeletedData/route.deletedData");
+const menuIrem_route_1 = require("../modules/menuItem/menuIrem.route");
 const router = (0, express_1.Router)();
 const AllRoutes = [
     {
@@ -23,6 +24,10 @@ const AllRoutes = [
     {
         path: "/restaurant",
         route: restaurant_route_1.restaurantRoutes,
+    },
+    {
+        path: "/menu",
+        route: menuIrem_route_1.menuItemtRoutes,
     },
     {
         path: "/user",

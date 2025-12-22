@@ -6,17 +6,17 @@ const router = Router();
 
 // MenuItem routes
 router.post(
-  "/menu/:restaurantId/create",
+  "/:restaurantId/create",
   authorizeRole(["ADMIN", "USER"]),
   menuItemController.createMenuItem
 );
 router.patch(
-  "/menu/:id/update",
+  "/:id/update",
   authorizeRole(["ADMIN", "USER"]),
   menuItemController.updateMenuItem
 );
 router.delete(
-  "/menu/:id/delete",
+  "/:id/delete",
   authorizeRole(["ADMIN", "USER"]),
  menuItemController.deleteMenuItem
 );
